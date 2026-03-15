@@ -1,26 +1,54 @@
-import { METHOD, URL } from "./config"
+import { useEffect, useRef } from "react"
+import {
+  // METHOD,
+  URL
+} from "./config"
+import axios from "axios"
 
 const App = () => {
 
-  const getData = () => {
-    fetch(URL, {
-      method: METHOD
-    })
-      .then(res => {
-        console.log("Response:", res)
-        console.log("Request Method:", METHOD)
-        console.log("Response Status Code:", res.status)
-        return res.json()
+  // console.log(axios)
 
-      })
-      .then(data => console.log("Data:", data))
-      .catch(error => console.log(error))
+  const getData = () => {
+    // fetch(URL, {
+    //   method: METHOD
+    // })
+    //   .then(res => {
+    //     console.log("Response:", res)
+    //     console.log("Request Method:", METHOD)
+    //     console.log("Response Status Code:", res.status)
+    //     return res.json()
+
+    //   })
+    //   .then(data => console.log("Data:", data))
+    //   .catch(error => console.log(error))
+
+    axios.get(URL).then(res => {
+      // if the request failed the below code will not event execute
+      console.log("Response Status Code:", res.status)
+      console.log("Request Method:", res.config.method)
+      console.log(res)
+    })
+    // no need to use the .json() axios automatically converts JSON for you
+    // data is available in res.data
+
   }
+
+  const btnRef = useRef<HTMLButtonElement>(null)
+  useEffect(() => {
+    btnRef.current?.focus()
+  }, [])
 
   return (
     <main>
       <h1>Axios SMC</h1>
-      <button type="button" onClick={() => getData()}>Fetch</button>
+      <button
+        ref={btnRef}
+        type="button"
+        onClick={() => getData()}
+      >
+        Fetch
+      </button>
     </main>
   )
 }

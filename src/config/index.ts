@@ -17,11 +17,11 @@ const SITE = "jsonplaceholder.typicode.com"
  * 500 - internal server erro
  */
 
-const METHOD: RequestMethod = "POST"
+const METHOD: RequestMethod = "GET"
 
-const PARAMS = "users" // POST->201 and GET->200(return 10 users)
-// const PARAMS = "posts" // POST->201 and GET->200(returns 100 objects)
-// const PARAMS = "posts/1" // 200
+const PARAMS = "users" // POST->201 | GET->200(return 10 users)
+// const PARAMS = "posts" // POST->201 | GET->200(returns 100 objects)
+// const PARAMS = "posts/1" // GET->200 
 // const PARAMS = "posasdfadf" // 404
 
 
