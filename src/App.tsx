@@ -1,11 +1,14 @@
-import { URL } from "./config"
+import { METHOD, URL } from "./config"
 
 const App = () => {
 
-  const getData = () => {    
-    fetch(URL)
+  const getData = () => {
+    fetch(URL, {
+      method: METHOD
+    })
       .then(res => {
         console.log("Response:", res)
+        console.log("Request Method:", METHOD)
         console.log("Response Status Code:", res.status)
         return res.json()
 
@@ -13,15 +16,6 @@ const App = () => {
       .then(data => console.log("Data:", data))
       .catch(error => console.log(error))
   }
-
-  /**
-   * 200 - success
-   * 201 - success and something created
-   * 204 - success but no content created or sent in response
-   * 404 - not found
-   * 401 - unauthorized
-   * 500 - internal server erro
-   */
 
   return (
     <main>
