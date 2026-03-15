@@ -1,7 +1,15 @@
-const App = () => {
-  const URL = "https://jsonplaceholder.typicode.com/posts/1"
+import { URL } from "./config"
 
-  fetch(URL).then(res => res.json()).then(data => console.log(data))
+const App = () => {
+
+  const getData = () => {
+    fetch(URL)
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(error => console.log(error))
+  }
+
+  // getData()
 
   return <h1>Axios SMC</h1>
 }
