@@ -23,14 +23,47 @@ const App = () => {
     //   .then(data => console.log("Data:", data))
     //   .catch(error => console.log(error))
 
-    axios.get(URL).then(res => {
-      // if the request failed the below code will not event execute
-      console.log("Response Status Code:", res.status)
-      console.log("Request Method:", res.config.method)
-      console.log(res)
-    })
-    // no need to use the .json() axios automatically converts JSON for you
-    // data is available in res.data
+
+    type ResponseData = {
+      id: number,
+      name: string,
+      username: string,
+      email: string,
+      address: {
+        street: string,
+        suite: string,
+        city: string,
+        zipcode: string,
+        geo: {
+          lat: string,
+          lng: string
+        }
+      },
+      phone: string,
+      website: string,
+      company: {
+        name: string,
+        catchPhrase: string,
+        bs: string
+      }
+    }
+
+
+    try {
+      axios.get<ResponseData[]>(URL).then(res => {
+        // if the request failed the below code will not event execute
+        console.log("Response Status Code:", res.status)
+        console.log("Request Method:", res.config.method)
+        console.log(res.data.map(e => e.name))
+        // res.data.forEach(element => {
+        //   console.log(element.name)
+        // });
+      })
+      // no need to use the .json() axios automatically converts JSON for you
+      // data is available in res.data
+    } catch (error) {
+      console.log(error)
+    }
 
   }
 
