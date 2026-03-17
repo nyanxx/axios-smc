@@ -23,7 +23,7 @@ const BASEURL = "https://jsonplaceholder.typicode.com/"
 
 const METHOD: RequestMethod = "GET"
 
-const PARAMS = {
+const ROUTES = {
     USERS: "users", // POST->201 | GET->200(return 10 users)
     POSTS: "posts", // POST->201 | GET->200(returns 100 objects)
     POST_1: "posts/1", // GET->200 
@@ -34,4 +34,4 @@ const PARAMS = {
 // const URL = `https://${SITE}/${PARAMS}`
 
 
-export { METHOD, BASEURL, PARAMS }
+export { METHOD, BASEURL, ROUTES }

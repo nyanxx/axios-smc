@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 import {
-  PARAMS,
+  ROUTES,
 } from "./config"
 import axios from "./api/axios"
 import type { PostObject } from "./types/PostData"
@@ -10,27 +10,18 @@ import type { ResponseData } from "./types/ResponseData"
 const App = () => {
 
   const getData = async (): Promise<void> => {
-    // fetch(URL, {
-    //   method: METHOD
-    // })
-    //   .then(res => {
-    //     console.log("Response:", res)
-    //     console.log("Request Method:", METHOD)
-    //     console.log("Response Status Code:", res.status)
-    //     return res.json()
-
-    //   })
-    //   .then(data => console.log("Data:", data))
-    //   .catch(error => console.log(error))
-
     try {
-      const res = await axios.get<ResponseData[]>(PARAMS.INVALID_ROUTE)
+      // const res = await axios.get<ResponseData[]>("posts?id=12") // OR
+      // const res = await axios.get<ResponseData[]>("posts", { params: { userId: 12 } })
+      const res = await axios.get<ResponseData[]>("comments", { params: { postId: 12 } })
+
       // if the request failed the below code will not event execute
-      console.log("Response Status Code:", res.status)
+      console.log("Response Status Code:", res.status) // 200
       console.log("Request Method:", res.config.method)
+      console.log("Request Header:", res.headers)
       // data is available in res.data
       console.log("Data:", res.data)
-      console.log(res.data.forEach(e => e.name))
+
       // no need to use the .json() axios automatically converts JSON for you
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -43,24 +34,23 @@ const App = () => {
         console.error("Unexpected Error:", error)
       }
     }
-
   }
 
   const postData = async (): Promise<void> => {
 
     const postData: PostObject = {
-      title: "Axios Practice",
-      body: "Posting data",
-      userId: 5
+      title: "Learning Request Body",
+      body: "Practice sending body data",
+      userId: 3
     }
 
     try {
       const res = await axios.post<PostObject & { id: number }>(
-        PARAMS.POSTS,
+        ROUTES.POSTS,
         postData
       )
 
-      console.log("Response Status Code:", res.status)
+      console.log("Response Status Code:", res.status) // 201
       console.log("Request Method:", res.config.method)
       console.log("Data:", res.data)
       console.log(res.data.id)
@@ -83,18 +73,18 @@ const App = () => {
 
     const replaceData: PostObject & { id: number } = {
       id: 1,
-      title: "Updated Title",
-      body: "Updated body",
+      title: "New Title",
+      body: "New Body",
       userId: 1
     }
 
     try {
       const res = await axios.put(
         // PARAMS.POST_1,
-        "post/10",
+        "posts/2",
         replaceData
       )
-      console.log("Response Status Code:", res.status)
+      console.log("Response Status Code:", res.status) // 201
       console.log("Request Method:", res.config.method)
       console.log("Data:", res.data)
       console.log(res.data.id)
@@ -121,7 +111,7 @@ const App = () => {
 
     try {
       const res = await axios.patch(
-        PARAMS.POST_1,
+        ROUTES.POST_1,
         updateData
       )
       console.log("Response Status Code:", res.status)
@@ -145,7 +135,7 @@ const App = () => {
   const deleteData = async (): Promise<void> => {
     try {
       const res = await axios.delete(
-        PARAMS.POST_1,
+        ROUTES.POST_1,
       )
       console.log("Response Status Code:", res.status) //200
       console.log("Request Method:", res.config.method)
