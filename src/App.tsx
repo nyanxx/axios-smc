@@ -13,14 +13,16 @@ const App = () => {
     try {
       // const res = await axios.get<ResponseData[]>("posts?id=12") // OR
       // const res = await axios.get<ResponseData[]>("posts", { params: { userId: 12 } })
-      const res = await axios.get<ResponseData[]>("comments", { params: { postId: 12 } })
+      const res = await axios.get<ResponseData>("users/3", { params: { postId: 12 } })
 
       // if the request failed the below code will not event execute
       console.log("Response Status Code:", res.status) // 200
       console.log("Request Method:", res.config.method)
       console.log("Request Header:", res.headers)
       // data is available in res.data
-      console.log("Data:", res.data)
+      console.log("Name:", res.data.name)
+      console.log("Email:", res.data.email)
+      console.log("Company Name:", res.data.company.name )
 
       // no need to use the .json() axios automatically converts JSON for you
     } catch (error) {
