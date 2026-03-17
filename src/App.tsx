@@ -173,39 +173,49 @@ const App = () => {
   }, [])
 
   return (
-    <main>
-      <h1>Axios SMC</h1>
-      <button
-        ref={btnRef}
-        type="button"
-        onClick={() => getData()}
-      >
-        GET
-      </button>
-      <button
-        type="button"
-        onClick={() => postData()}
-      >
-        POST
-      </button>
-      <button
-        type="button"
-        onClick={() => putData()}
-      >
-        PUT(replace entire resource)
-      </button>
-      <button
-        type="button"
-        onClick={() => patchData()}
-      >
-        PATCH (partial update)
-      </button>
-      <button
-        type="button"
-        onClick={() => deleteData()}
-      >
-        DELETE
-      </button>
+    <main className="py-10 px-20 md:py-25 md:px-30">
+      <h1 className="text-3xl font-bold mb-4">Axios SMC</h1>
+      <div className="flex flex-wrap gap-3 font-semibold text-md mb-5">
+        <button
+          className="cursor-pointer shadow-sm py-1 px-4  bg-amber-100 hover:bg-[#fdeeb5] rounded-lg"
+          ref={btnRef}
+          type="button"
+          onClick={() => getData()}
+        >
+          GET
+        </button>
+        <button
+          className="cursor-pointer shadow-sm py-1 px-4  bg-amber-100 hover:bg-[#fdeeb5] rounded-lg"
+          type="button"
+          onClick={() => postData()}
+        >
+          POST
+        </button>
+        <button
+          className="cursor-pointer shadow-sm py-1 px-4  bg-amber-100 hover:bg-[#fdeeb5] rounded-lg"
+          type="button"
+          onClick={() => putData()}
+        >
+          PUT(replace entire resource)
+        </button>
+        <button
+          className="cursor-pointer shadow-sm py-1 px-4  bg-amber-100 hover:bg-[#fdeeb5] rounded-lg"
+          type="button"
+          onClick={() => patchData()}
+        >
+          PATCH (partial update)
+        </button>
+        <button
+          className="cursor-pointer shadow-sm py-1 px-4  bg-amber-100 hover:bg-[#fdeeb5] rounded-lg"
+          type="button"
+          onClick={() => deleteData()}
+        >
+          DELETE
+        </button>
+      </div>
+      <section className="border rounded-lg py-5 px-10 font-semibold border-dashed">
+        nil...
+      </section>
     </main>
   )
 }
