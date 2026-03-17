@@ -3,3 +3,5 @@ export type PostObject = {
     body: string,
     userId: number
 }
+
+export type PostData = PostObject & { id: number }
