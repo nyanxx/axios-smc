@@ -1,4 +1,4 @@
-type RequestMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE"
+export type RequestMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE"
 const BASEURL = "https://jsonplaceholder.typicode.com/"
 
 /**
