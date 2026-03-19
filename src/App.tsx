@@ -1,24 +1,33 @@
-import axios from "./api/axios"
+import axiosInstance from "./api/axios"
 import { AxiosError, type AxiosRequestConfig } from "axios"
 import { axiosButtons } from "./data"
+import { useState } from "react"
 
 const App = () => {
 
+  const [responseData, setResposneData] = useState("")
+  const [error, setError] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+
   const handleClick = async (options: AxiosRequestConfig) => {
     try {
-      const res = await axios({ ...options })
-
+      setIsLoading(true)
+      setResposneData("")
+      setError("")
+      const res = await axiosInstance({ ...options })
       // if the request failed the below code will not event execute
       console.log("Response Status Code:", res.status) // 200
       console.log("Request Method:", res.config.method)
       console.log("Request Header:", res.headers)
+      console.log("Response:", res)
       // data is available in res.data
-      if (res.status === 200) {
-        console.log("Data:", res.data)
-      }
+      console.log("Data:", res.data)
+      setResposneData(JSON.stringify(res.data, null, 2))
+
       // no need to use the .json() axios automatically converts JSON for you
     } catch (error) {
       if (error instanceof AxiosError) {
+        setError(error.message)
         console.log("Error Message:", error.message)
         console.log("Error Config:", error.config)
         if (!error.response) { return console.error("Check network and try again!") }
@@ -29,6 +38,8 @@ const App = () => {
       } else {
         console.error("Unexpected Error:", error)
       }
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -46,7 +57,10 @@ const App = () => {
                 method: el.method,
                 url: el.url,
                 params: el.params,
-                data: el.data
+                data: el.data,
+                // headers: {
+                //   Authorization: "Bearer token-three" // this overides the earlier defualt
+                // }
               })}
             >
               {el.btnName}
@@ -55,7 +69,11 @@ const App = () => {
         }
       </div>
       <section className="border rounded-lg py-5 px-10 font-semibold border-dashed">
-        nil...
+        {/* scope for optimization */}
+        {isLoading && "Loading...."}
+        {!responseData && !error && !isLoading && "Clike the above buttons to see the respective response"}
+        {responseData && !error && <pre className="text-wrap">{responseData}</pre>}
+        {error && error}
       </section>
     </main >
   )

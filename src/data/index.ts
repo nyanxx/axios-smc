@@ -38,7 +38,7 @@ export const axiosButtons: FetchButtonMeta[] = [
     {
         btnName: "POST",
         method: "POST",
-        url: ROUTES.POSTS,
+        url: ROUTES.INVALID_ROUTE,
         data: postData
     },
     {
