@@ -16,9 +16,9 @@ const App = () => {
       setError("")
       const res = await axiosInstance({ ...options })
       // if the request failed the below code will not event execute
-      console.log("Response Status Code:", res.status) // 200
       console.log("Request Method:", res.config.method)
       console.log("Request Header:", res.headers)
+      console.log("Response Status Code:", res.status) // 200
       console.log("Response:", res)
       // data is available in res.data
       console.log("Data:", res.data)
@@ -43,6 +43,21 @@ const App = () => {
     }
   }
 
+
+  const handleParallelFetch = () => {
+    // if any one of the promises rejects, the entire Promise.all rejects with a single error object
+    // if want to capture both successes and failures independently try Promise.allSettled 
+    Promise.all([
+      axiosInstance.get("posts"),
+      axiosInstance.get("users")
+    ]).then(([postsResponse, usersResponse]) => {
+      console.log("Posts:", postsResponse.data);
+      console.log("Users:", usersResponse.data);
+    }).catch((error) => {
+      console.error(error)
+    })
+  }
+
   return (
     <main className="py-10 px-20 md:py-25 md:px-30">
       <h1 className="text-3xl font-bold mb-4">Axios SMC</h1>
@@ -51,7 +66,7 @@ const App = () => {
           axiosButtons.map((el) => (
             <button
               key={el.btnName}
-              className="cursor-pointer shadow-sm py-1 px-4  bg-amber-100 hover:bg-[#fdeeb5] rounded-lg"
+              className="cursor-pointer shadow-sm py-1 px-4 bg-amber-100 hover:bg-[#fdeeb5] rounded-lg"
               type="button"
               onClick={() => handleClick({
                 method: el.method,
@@ -67,11 +82,17 @@ const App = () => {
             </button>
           ))
         }
+        <button
+          onClick={handleParallelFetch}
+          className="cursor-pointer shadow-sm py-1 px-4 bg-red-100 hover:bg-[#facfcf] rounded-lg"
+        >
+          Parallel (see console)
+        </button>
       </div>
-      <section className="border rounded-lg py-5 px-10 font-semibold border-dashed">
+      <section className="border rounded-lg py-5 px-10 font-semibold border-dashed bg-white shadow-sm">
         {/* scope for optimization */}
         {isLoading && "Loading...."}
-        {!responseData && !error && !isLoading && "Clike the above buttons to see the respective response"}
+        {!responseData && !error && !isLoading && "Click the above buttons to see the respective response"}
         {responseData && !error && <pre className="text-wrap">{responseData}</pre>}
         {error && error}
       </section>
