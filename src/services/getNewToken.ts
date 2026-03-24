@@ -139,5 +139,5 @@ const tryMethodTwo = () => {
     .then((res) => console.log(res));
 };
 
-tryMethodOne();
-tryMethodTwo();
+// tryMethodOne();
+// tryMethodTwo();
