@@ -2,6 +2,8 @@ import axiosInstance from "./api/axios"
 import { AxiosError, type AxiosRequestConfig } from "axios"
 import { axiosButtons } from "./data"
 import { useState } from "react"
+import Services from "./components/Services"
+import "./services/getNewToken"
 
 const App = () => {
 
@@ -43,7 +45,6 @@ const App = () => {
     }
   }
 
-
   const handleParallelFetch = () => {
     // if any one of the promises rejects, the entire Promise.all rejects with a single error object
     // if want to capture both successes and failures independently try Promise.allSettled 
@@ -59,44 +60,54 @@ const App = () => {
   }
 
   return (
-    <main className="py-10 px-20 md:py-25 md:px-30">
-      <h1 className="text-3xl font-bold mb-4">Axios SMC</h1>
-      <div className="flex flex-wrap gap-3 font-semibold text-md mb-5">
-        {
-          axiosButtons.map((el) => (
-            <button
-              key={el.btnName}
-              className="cursor-pointer shadow-sm py-1 px-4 bg-amber-100 hover:bg-[#fdeeb5] rounded-lg"
-              type="button"
-              onClick={() => handleClick({
-                method: el.method,
-                url: el.url,
-                params: el.params,
-                data: el.data,
-                // headers: {
-                //   Authorization: "Bearer token-three" // this overides the earlier defualt
-                // }
-              })}
-            >
-              {el.btnName}
-            </button>
-          ))
-        }
-        <button
-          onClick={handleParallelFetch}
-          className="cursor-pointer shadow-sm py-1 px-4 bg-red-100 hover:bg-[#facfcf] rounded-lg"
-        >
-          Parallel (see console)
-        </button>
-      </div>
-      <section className="border rounded-lg py-5 px-10 font-semibold border-dashed bg-white shadow-sm">
-        {/* scope for optimization */}
-        {isLoading && "Loading...."}
-        {!responseData && !error && !isLoading && "Click the above buttons to see the respective response"}
-        {responseData && !error && <pre className="text-wrap">{responseData}</pre>}
-        {error && error}
-      </section>
-    </main >
+    <>
+      <header className="text-3xl font-bold mb-4">
+        <h1>Axios SMC</h1>
+      </header>
+      <main>
+        <div className="flex flex-wrap gap-3 font-semibold text-md mb-5">
+          {
+            axiosButtons.map((el) => (
+              <button
+                key={el.btnName}
+                className="cursor-pointer shadow-sm py-1 px-4 bg-amber-100 hover:bg-[#fdeeb5] rounded-lg"
+                type="button"
+                onClick={() => handleClick({
+                  method: el.method,
+                  url: el.url,
+                  params: el.params,
+                  data: el.data,
+                  // headers: {
+                  //   Authorization: "Bearer token-three" // this overides the earlier defualt
+                  // }
+                })}
+              >
+                {el.btnName}
+              </button>
+            ))
+          }
+          <button
+            onClick={handleParallelFetch}
+            className="cursor-pointer shadow-sm py-1 px-4 bg-red-100 hover:bg-[#facfcf] rounded-lg"
+          >
+            Parallel (see console)
+          </button>
+          <br />
+        </div>
+        <Services />
+        <section className="border rounded-lg py-5 px-10 font-semibold border-dashed bg-white shadow-sm">
+          {/* scope for optimization */}
+          {isLoading && "Loading...."}
+          {!responseData && !error && !isLoading && "Click the above buttons to see the respective response (if nothing is visible see console)"}
+          {responseData && !error && <pre className="text-wrap">{responseData}</pre>}
+          {error && error}
+        </section>
+      </main >
+      <footer className="bg-gray-200 text-center text-gray-700 py-5 text-sm font-semibold rounded-lg mt-5">
+        <p>💖 API - <a className="hover:underline text-orange-900" href="https://jsonplaceholder.typicode.com" target="_blank" rel="noopener noreferrer">{`JSONPlaceholder by typicode`}</a></p>
+      </footer>
+    </>
+
   )
 }
 
