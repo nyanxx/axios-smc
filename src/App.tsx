@@ -3,7 +3,9 @@ import { AxiosError, type AxiosRequestConfig } from "axios";
 import { axiosButtons } from "./data";
 import { useState } from "react";
 import Services from "./components/Services";
-import "./services/getNewToken";
+// import "./services/getNewToken";
+// import { abortControllerImplementationWithAxios } from "./cancellation/abortController";
+// import { axiosCancellationImplementation } from "./cancellation/cancelToken";
 
 const App = () => {
   const [responseData, setResposneData] = useState("");
@@ -64,6 +66,9 @@ const App = () => {
         console.error(error);
       });
   };
+
+  // axiosCancellationImplementation()
+  // abortControllerImplementationWithAxios();
 
   return (
     <>

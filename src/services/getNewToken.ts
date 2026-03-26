@@ -32,7 +32,7 @@ export function makeServer() {
   return server;
 }
 
-makeServer(); // Server initilization
+// makeServer(); // Server initilization
 
 /**
  * In order to not fall in infinite loop you can follow the following methods
@@ -83,6 +83,7 @@ refreshTestingWithIsRetry.interceptors.response.use(
 );
 
 // Usage
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const tryMethodOne = () => {
   refreshTestingWithIsRetry
     .get("/api/protected", {
@@ -129,6 +130,7 @@ refreshTestingWithRequestURL.interceptors.response.use(
 );
 
 // Usage
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const tryMethodTwo = () => {
   refreshTestingWithRequestURL
     .get("/api/protected", {
