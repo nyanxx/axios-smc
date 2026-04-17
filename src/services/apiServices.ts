@@ -19,6 +19,9 @@ const getCommentApiClient = axios.create({
   headers: { Authorization: `Bearer myFirstToken` },
 });
 
+// TODO: add the interceptors in the interceptors folder for future easy refrence
+// try as much as possible to modularize this so in the future you can look things up easily
+
 getCommentApiClient.interceptors.request.use((config) => {
   console.log("Request Interceptor No 4");
   const token = config.headers.Authorization?.toString().split(" ")[1];
@@ -69,6 +72,7 @@ getCommentApiClient.interceptors.response.use(
   },
   (error) => {
     console.log("Global error:", (error as Error).message);
+    // Important: propagate the error
     return Promise.reject(error);
   },
 );

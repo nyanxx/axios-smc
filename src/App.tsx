@@ -3,6 +3,13 @@ import { AxiosError, type AxiosRequestConfig } from "axios";
 import { axiosButtons } from "./data";
 import { useState } from "react";
 import Services from "./components/Services";
+import {
+  downloadFile,
+  manualDownloadFile,
+  uploadFile,
+} from "./uploadingFiles/serverCommunication";
+import DragAndDropForUpload from "./uploadingFiles/components/DragAndDropForUpload";
+import DownloadButtonWithProgress from "./uploadingFiles/components/DownloadButtonWithProgress";
 // import "./services/getNewToken";
 // import { abortControllerImplementationWithAxios } from "./cancellation/abortController";
 // import { axiosCancellationImplementation } from "./cancellation/cancelToken";
@@ -118,6 +125,38 @@ const App = () => {
           )}
           {error && error}
         </section>
+        <section className="mt-10">
+          <h2 className="text-2xl font-medium mb-3">
+            Upload and Download a File (see console)
+          </h2>
+          <button
+            className="cursor-pointer font-semibold shadow-sm py-1 px-4 bg-green-200 hover:bg-[#85dba3] rounded-lg mr-3"
+            type="button"
+            onClick={() => uploadFile()}
+            title="Upload an in-memory file to backend express server"
+          >
+            Upload
+          </button>
+          <button
+            className="cursor-pointer font-semibold shadow-sm py-1 px-4 bg-green-200 hover:bg-[#85dba3] rounded-lg mr-3"
+            type="button"
+            onClick={() => manualDownloadFile()}
+            title="Download file as blob and programmatically convert and download that to downloadable file"
+          >
+            Manual Download
+          </button>
+
+          <button
+            className="cursor-pointer font-semibold shadow-sm py-1 px-4 bg-green-200 hover:bg-[#85dba3] rounded-lg mr-3"
+            type="button"
+            onClick={() => downloadFile()}
+            title="Download file by hitting the download serving endpoint"
+          >
+            Download
+          </button>
+        </section>
+        <DragAndDropForUpload />
+        <DownloadButtonWithProgress />
       </main>
       <footer className="bg-gray-200 text-center text-gray-700 py-5 text-sm font-semibold rounded-lg mt-5">
         <p>
