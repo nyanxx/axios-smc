@@ -10,6 +10,14 @@ import {
 } from "./uploadingFiles/serverCommunication";
 import DragAndDropForUpload from "./uploadingFiles/components/DragAndDropForUpload";
 import DownloadButtonWithProgress from "./uploadingFiles/components/DownloadButtonWithProgress";
+import {
+  RequestDataTransformation,
+  ResponseDataTransformation,
+} from "./transformation";
+import {
+  ParallelFetchingWithPromiseAll,
+  ParallelFetchingWithAxiosAll,
+} from "./parallelFetching/";
 // import "./services/getNewToken";
 // import { abortControllerImplementationWithAxios } from "./cancellation/abortController";
 // import { axiosCancellationImplementation } from "./cancellation/cancelToken";
@@ -61,19 +69,6 @@ const App = () => {
     }
   };
 
-  const handleParallelFetch = () => {
-    // if any one of the promises rejects, the entire Promise.all rejects with a single error object
-    // if want to capture both successes and failures independently try Promise.allSettled
-    Promise.all([axiosInstance.get("posts"), axiosInstance.get("users")])
-      .then(([postsResponse, usersResponse]) => {
-        console.log("Posts:", postsResponse.data);
-        console.log("Users:", usersResponse.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
   // axiosCancellationImplementation()
   // abortControllerImplementationWithAxios();
 
@@ -104,12 +99,6 @@ const App = () => {
               {el.btnName}
             </button>
           ))}
-          <button
-            onClick={handleParallelFetch}
-            className="cursor-pointer shadow-sm py-1 px-4 bg-red-100 hover:bg-[#facfcf] rounded-lg"
-          >
-            Parallel (see console)
-          </button>
           <br />
         </div>
         <Services />
@@ -157,6 +146,17 @@ const App = () => {
         </section>
         <DragAndDropForUpload />
         <DownloadButtonWithProgress />
+        <section className="mt-10">
+          <RequestDataTransformation />
+          <ResponseDataTransformation />
+        </section>
+        <section className="mt-13 flex flex-col gap-3 border-2 border-[#ccc] p-4 my-1 bg-[#fafafa]">
+          <h2 className="-mt-[1.8rem] rounded-lg border-t border-l border-r border-[#ccc] w-fit bg-[#fafafa] inline-block px-4 font-bold">
+            Parallel Fetching (<em>See Console</em>)
+          </h2>
+          <ParallelFetchingWithPromiseAll />
+          <ParallelFetchingWithAxiosAll />
+        </section>
       </main>
       <footer className="bg-gray-200 text-center text-gray-700 py-5 text-sm font-semibold rounded-lg mt-5">
         <p>
