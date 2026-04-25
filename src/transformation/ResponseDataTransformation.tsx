@@ -28,7 +28,7 @@ function ResponseDataTransformation() {
   }
   return (
     <button
-      className="mt-3 cursor-pointer font-semibold shadow-sm py-1 px-4 bg-teal-200 hover:bg-[#7be3ce] rounded-lg mr-3"
+      className=" cursor-pointer font-semibold shadow-sm py-1 px-4 bg-teal-200 hover:bg-[#7be3ce] rounded-lg mr-3 w-fit"
       onClick={handleResDataTransformation}
     >
       Response Data Transformation

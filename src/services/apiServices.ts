@@ -13,7 +13,7 @@ const getAPIClient = axios.create({
 // there can also be userapiclient and many more for Separate concerns and to have different configs per API
 
 const getCommentApiClient = axios.create({
-  method: "GETD",
+  method: "GET",
   baseURL: "https://jsonplaceholder.typicode.com/comments",
   timeout: 5000,
   headers: { Authorization: `Bearer myFirstToken` },

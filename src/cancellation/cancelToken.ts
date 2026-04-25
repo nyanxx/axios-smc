@@ -11,7 +11,7 @@ export function axiosCancellationImplementation() {
     .catch((error) => {
       if (isCancel(error)) {
         console.error("The request was intenally cancelled", error);
-        console.log("Reason:", source.token.reason?.message)
+        console.log("Reason:", source.token.reason?.message);
         console.log("Error Name:", error.name);
         console.log("Error Message:", error.message);
       } else {

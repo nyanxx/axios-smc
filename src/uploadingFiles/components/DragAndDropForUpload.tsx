@@ -9,7 +9,7 @@ function DragAndDropForUpload() {
   return (
     <section id="drag-and-drop-section" className="relative">
       <div
-        className="mt-3 h-30 bg-gray-200 rounded-xl w-full border border-dashed p-1 inline-flex justify-center items-center font-medium text-gray-800"
+        className="h-30 bg-gray-200 rounded-xl w-full border border-dashed p-1 inline-flex justify-center items-center font-medium text-gray-800"
         onDragOver={(event) => {
           event.preventDefault();
         }}
@@ -29,7 +29,7 @@ function DragAndDropForUpload() {
                 formData.set("myFile", file);
 
                 // Send file in formData to the server
-                setUploadPercentage(0)
+                setUploadPercentage(0);
                 axios
                   .post("http://localhost:3001/api/upload", formData, {
                     headers: {

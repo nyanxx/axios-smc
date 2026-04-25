@@ -9,7 +9,7 @@ import {
 
 export default function Services() {
   return (
-    <div className="flex flex-wrap gap-3 font-semibold text-md mb-5">
+    <div className="flex flex-wrap gap-3 font-semibold text-md ">
       <button
         onClick={async () => console.log(await getUsers())}
         className="cursor-pointer shadow-sm py-1 px-4 bg-indigo-100 hover:bg-[#c6d3ff] rounded-lg"

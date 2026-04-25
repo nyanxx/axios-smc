@@ -139,4 +139,3 @@ export function mimeToExtension(type: string): string {
   };
   return mimeMap[type] || "bin"; // .bin is fallback if the type is not mentioned above
 }
-

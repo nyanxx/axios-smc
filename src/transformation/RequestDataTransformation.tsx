@@ -25,7 +25,7 @@ function RequestDataTransformation() {
       disabled={true}
       // hover:bg-[#7be3ce]
       title="Not woking for me -- check obs"
-      className="opacity-60 mt-3 cursor-not-allowed font-semibold shadow-sm py-1 px-4 bg-teal-200  rounded-lg mr-3"
+      className="opacity-60 cursor-not-allowed font-semibold shadow-sm py-1 px-4 bg-teal-200  rounded-lg mr-3 w-fit"
       onClick={handleReqDataTransformation}
     >
       Request Data Transformation
